@@ -240,7 +240,7 @@ aside {
 
 /* PRODUCT DETAIL*/
 #productDetail {
-    padding-bottom: 24px;
+    padding: 20px;
 }
 .product-detail-close {
     background: var(--white);
@@ -252,9 +252,10 @@ aside {
     z-index: 2;
     padding: 12px;
     border-radius: 50%;
-}
-.product-detail-close:hover {
     cursor: pointer;
+}
+.product-detail-close img {
+    position: absolute;
 }
 #productDetail > img:nth-child(2) {
     width: 100%;

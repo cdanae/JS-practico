@@ -4,12 +4,15 @@ const menuHamburguer = document.querySelector('.menu');
 const shoppingCart = document.querySelector('.navbar-shopping-cart');
 const mobileMenu = document.querySelector('.mobile-menu');
 const shoppingCartContainer = document.querySelector('#shoppingCartContainer');
+const productDetailContainer = document.querySelector('#productDetail');
+const btnCloseProductDetail = document.querySelector('.product-detail-close');
 const cardsContainer = document.querySelector('.cards-container');
 
 
 menuEmail.addEventListener('click', toggleDesktopMenu);
 menuHamburguer.addEventListener('click', toggleMobileMenu);
 shoppingCart.addEventListener('click', toggleShoppingCart);
+btnCloseProductDetail.addEventListener('click', closeProductDetailAside);
 
 function toggleDesktopMenu() {
     const isShoppingCartOpen = !shoppingCartContainer.classList.contains('inactive');
@@ -28,21 +31,30 @@ function toggleMobileMenu() {
     if (isShoppingCartOpen) {
         shoppingCartContainer.classList.add('inactive');
     }
+    
+    closeProductDetailAside()
 };
 function toggleShoppingCart() {
     const isMobileOpen = !mobileMenu.classList.contains('inactive');
-    const isDesktopMenuOpen = !desktopMenu.classList.contains('inactive');
+    const isProductDetailOpen = !productDetailContainer.classList.contains('inactive');
 
     shoppingCartContainer.classList.toggle('inactive');
 
     if (isMobileOpen) {
         mobileMenu.classList.add('inactive');
-    } 
-    if (isDesktopMenuOpen) {
-        desktopMenu.classList.add('inactive');
-    }
+    }; 
 
+    if (isProductDetailOpen) {
+        productDetailContainer.classList.add('inactive');
+    };
 };
+function openProductDetailAside() {
+    productDetailContainer.classList.remove('inactive');
+    shoppingCartContainer.classList.add('inactive'); //no se usa el metodo anterior de if debido a que no en esta seccion no estamos trabajando con toggle.
+}
+function closeProductDetailAside() {
+    productDetailContainer.classList.add('inactive')
+}
 
 const productList = [];
 productList.push({
@@ -80,8 +92,10 @@ for (product of productList) {
     const productCard = document.createElement('div');
     productCard.classList.add('product-card');
 
+    // product = {name, price, image} -> product.image
     const productImgCard = document.createElement('img');
     productImgCard.setAttribute('src', product.image);
+    productImgCard.addEventListener('click', openProductDetailAside);
 
     const productInfo = document.createElement('div');
     productInfo.classList.add('product-info');
